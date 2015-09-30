@@ -10,7 +10,7 @@ urls = (
 )
 
 
-DEVICE = '/dev/ttyACM2'
+DEVICE = '/dev/ttyACM0'
 
 
 class testjs:
@@ -26,13 +26,16 @@ class index:
 
 
 class driver:
+    def OPTIONS(self):
+	pass
     def POST(self):
         web.header('Content-Type', 'application/json')
-        i = web.input()
-        command = i.cmd
+        #i = web.input()
+        i = json.loads(web.data())
+        command = i['cmd']
         try:
             if command == 'run':
-                params = i.param
+                params = i['param']
                 p = params.split(' ')
                 web.board.run(int(p[0]), float(p[1]))
             elif command == 'status':

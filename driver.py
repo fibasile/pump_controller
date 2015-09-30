@@ -12,16 +12,21 @@ class Driver():
 			raise "Error"
 
 	def initSerial(self):
+		print 'Opening serial %s' % self.port
 		self.tty = serial.Serial(self.port, 9600)
 		if not self.tty.isOpen():
 		    self.tty.open()
 		    if not self.tty.isOpen():
+			print 'failed.'
 		    	return False
+		print 'success.'
+		print 'Checking status...'
 		while True:
-			 line = self.tty.readline()
-			 if line.count('Ready')>0:
+			line = self.tty.readline()
+			if line.count('Ready')>0:
 				self.status = 'ready'
 				return True
+				print '..ok'
 		self.status = 'error'
 		return False
 

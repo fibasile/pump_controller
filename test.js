@@ -22,10 +22,10 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "/driver",
-            data: {
+            data: JSON.stringify({
                 "cmd": name,
                 "param": param
-            },
+            }),
             success: function(data) {
             	console.log(data);
                 cb(data);
