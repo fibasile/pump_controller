@@ -27,8 +27,8 @@ class index:
 class power:
     def POST(self):
         web.header('Content-Type', 'application/json')
-        i = web.input()
-        command = i.cmd
+        i = json.loads(web.data())
+        command = i['cmd']
         try:
            if command == 'reboot':
               os.system('/usr/sbin/shutdown -r now')
