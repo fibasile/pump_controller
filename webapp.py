@@ -24,6 +24,22 @@ class index:
         return hello()  
         #return "Pump Control v0.1"
 
+class power:
+    def POST(self):
+        web.header('Content-Type', 'application/json')
+        i = web.input()
+        command = i.cmd
+        try:
+           if command == 'reboot':
+              os.system('/usr/sbin/shutdown -r now')
+           elif command == 'shutdown':
+              os.system('/usr/sbin/halt')
+        except Exception,msg:
+            print "Error"
+            print msg
+            return {'error' : ' %s' % msg}
+        return {'result' : 'ok'}
+
 
 class driver:
     def OPTIONS(self):
